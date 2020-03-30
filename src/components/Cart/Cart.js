@@ -1,8 +1,10 @@
 import React from 'react';
 
+
 const Cart = (props) => {
     const cart = props.cart;
-    const total = cart.reduce((total, prd) => total+prd.price,0)
+    const total = cart.reduce((total, prd) => total+prd.price*prd.quantity,0);
+    debugger;
     
     let shipping = 0;
     if (total> 35){
@@ -31,6 +33,10 @@ const Cart = (props) => {
             <p>Shipping Cost : {roundingNumber(shipping)}</p>
             <p>Estimated Tax :{roundingNumber(tax)}</p>
             <p>Grand Total : {roundingNumber(grandTotal)} </p>
+            <br/>
+                {
+                    props.children
+                }
         </div>
     );
 };
