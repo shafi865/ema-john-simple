@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import {UserContext} from '../../App';
 
 
 const Cart = (props) => {
+
     const cart = props.cart;
+    const user = useContext(UserContext);
+    console.log(user);
     const total = cart.reduce((total, prd) => total+prd.price*prd.quantity,0);
-    debugger;
+    //debugger;
     
     let shipping = 0;
     if (total> 35){
@@ -37,6 +41,8 @@ const Cart = (props) => {
                 {
                     props.children
                 }
+            <br/>
+            <p>{user}</p>
         </div>
     );
 };
