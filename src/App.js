@@ -13,14 +13,15 @@ import Inventory from './components/Inventory/Inventory';
 import NotFound from './components/NotFound/NotFound';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import Login from './components/Login/Login';
+import { AuthContextProvider, PrivateRoute } from './components/Login/UseAuth';
+import Shipment from './components/Shipment/Shipment';
 
 
-export const UserContext = createContext();
 
 function App() {
   return (
     <div>
-      <UserContext.Provider value="PHero">
+      <AuthContextProvider>
           <Header></Header>
           <Router>
               <Switch>
@@ -42,12 +43,15 @@ function App() {
                 <Route path = "/login">
                   <Login></Login>
                 </Route>
+                <PrivateRoute path="/shipment">
+                  <Shipment></Shipment>
+                </PrivateRoute>
                 <Route path="*">
                   <NotFound></NotFound>
                 </Route>
               </Switch>
           </Router>
-     </UserContext.Provider>
+          </AuthContextProvider>
       
       
     </div>

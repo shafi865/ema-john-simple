@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import logo from '../../images/logo.png';
 import './Header.css';
-import { UserContext } from '../../App';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import Auth, { useAuth } from '../Login/UseAuth';
 
 
 
@@ -16,7 +16,8 @@ const usePrevious = value => {
 
 
 const Header = () => {
-    const user = useContext(UserContext);
+    const auth = useAuth();
+    console.log(auth);
     const [count, setCount] =useState(0);
     const previous = usePrevious(count);
     return (
@@ -29,7 +30,15 @@ const Header = () => {
                 <a href="/shop">Shop</a>
                 <a href="/review">Order review</a>
                 <a href="/inventory">Manage Inventory</a>
-                <span style={{color:'white'}}>{user}</span>
+                {
+                    auth.user &&
+                    <span style={{color:'white'}}>{auth.user.name}</span> 
+                }
+                {
+                    auth.user ? <a href="/login">  Signed Out</a>
+                    : <a href="/login">Signed In</a>
+                }
+
             </nav>
         </div>
     );
